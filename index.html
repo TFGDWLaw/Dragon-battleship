@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battleship Dragons</title>
+  <link rel="icon" type="image/png" href="assets/ui/dragon-favicon.png?v=1" />
+  <link rel="stylesheet" href="style.hover.fixed.css?v=20260621-shuffle-button" />
+  <script>
+    window.addEventListener('error', function (event) {
+      var panel = document.getElementById('runtimeError');
+      if (!panel) return;
+      panel.hidden = false;
+      panel.textContent = 'Game failed to start: ' + (event.message || 'Unknown JavaScript error') + '. Please use this clean build index.html.';
+    });
+  </script>
+</head>
+<body>
+  <main class="game-shell" aria-label="Battleship Command">
+    <section id="mainMenu" class="menu-screen menu-screen-reference" aria-labelledby="menuTitle">
+      <h1 id="menuTitle" class="sr-only">Battleship Command Main Menu</h1>
+      <div class="menu-reference-art" aria-hidden="true"></div>
+      <nav class="menu-hotspots" aria-label="Main menu">
+        <button id="startGameBtn" class="menu-hotspot start-hotspot" type="button" aria-label="Start Game"><span class="sr-only">Start Game</span></button>
+        <button id="howToPlayBtn" class="menu-hotspot how-hotspot" type="button" aria-label="How To Play"><span class="sr-only">How To Play</span></button>
+        <button id="settingsBtn" class="menu-hotspot settings-hotspot" type="button" aria-label="Settings"><span class="sr-only">Settings</span></button>
+        <button id="exitBtn" class="menu-hotspot exit-hotspot" type="button" aria-label="Exit"><span class="sr-only">Exit</span></button>
+      </nav>
+    </section>
+
+    <section id="gameScreen" class="game-screen hidden" aria-label="Battleship game screen">
+      <div class="game-toolbar">
+        <button id="returnToMenuBtn" type="button">← MAIN MENU</button>
+        <button id="shuffleBtn" class="shuffle-button" type="button"><span class="shuffle-symbol">⟳</span><span>SHUFFLE</span></button>
+        <span class="placement-tip">Place dragon warships with the mouse. Press <kbd>R</kbd> to rotate.</span>
+        <button id="pauseBtn" class="pause-button" type="button" aria-label="Pause game">Ⅱ PAUSE</button>
+      </div>
+      <canvas id="gameCanvas" width="1920" height="1080" aria-label="Battleship Command game"></canvas>
+    </section>
+  </main>
+
+  <p id="runtimeError" hidden class="runtime-error" role="alert"></p>
+
+  <dialog id="howToPlayDialog" class="modal-dialog">
+    <button class="dialog-close" data-close-dialog aria-label="Close">×</button>
+    <h2>HOW TO PLAY</h2>
+    <ol>
+      <li>Place your dragon warships on Friendly Waters.</li>
+      <li>Use <b>R</b> to rotate the current ship.</li>
+      <li>Click a cell in Enemy Waters to fire.</li>
+      <li>A hit lets you fire again. A miss changes the turn.</li>
+      <li>Sink all enemy ships to win.</li>
+    </ol>
+    <button class="dialog-action" data-close-dialog type="button">UNDERSTOOD</button>
+  </dialog>
+
+  <dialog id="settingsDialog" class="modal-dialog">
+    <button class="dialog-close" data-close-dialog aria-label="Close">×</button>
+    <h2>SETTINGS</h2>
+    <label class="setting-row"><span>Sound effects</span><input id="soundToggle" type="checkbox" checked /></label>
+    <label class="setting-row"><span>Music</span><input id="musicToggle" type="checkbox" checked /></label>
+    <p id="audioStatus" class="setting-note audio-status" role="status"></p>
+    <button class="dialog-action" data-close-dialog type="button">SAVE &amp; CLOSE</button>
+  </dialog>
+
+  <dialog id="exitDialog" class="modal-dialog exit-dialog">
+    <button class="dialog-close" data-close-dialog aria-label="Close">×</button>
+    <h2>LEAVING SO SOON?</h2>
+    <p>Browsers cannot reliably close a tab opened by the user. You may close this tab whenever you are ready.</p>
+    <button class="dialog-action" data-close-dialog type="button">RETURN TO MENU</button>
+  </dialog>
+
+  <dialog id="pauseDialog" class="pause-dialog" aria-labelledby="pauseTitle">
+    <h2 id="pauseTitle">GAME PAUSED</h2>
+    <button id="restartGameBtn" class="pause-action" type="button">RESTART</button>
+    <button id="pauseSoundBtn" class="pause-action" type="button">SOUND: ON</button>
+    <button id="pauseExitBtn" class="pause-action" type="button">EXIT</button>
+  </dialog>
+
+  <script src="game.hover.fixed.js?v=20260621-target-lock-scope"></script>
+</body>
+</html>
