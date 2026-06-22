@@ -230,7 +230,7 @@ class Game {
     this.statusMessage = 'Dragon fleet shuffled and deployed!';
     this.showTurnBanner('PLAYER', () => {
       this.phase = PHASE.PLAYER_TURN;
-      this.statusMessage = 'Your Turn â€” choose an enemy grid cell.';
+      this.statusMessage = 'Your Turn - choose an enemy grid cell.';
     });
   }
 
